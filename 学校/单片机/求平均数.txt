@@ -1,0 +1,61 @@
+	SIZE EQU 10 
+	ARRAY EQU 30H
+	CHANGE EQU 0
+	ORG 0000H
+	MOV 30H,#02H
+	MOV 31H,#05H
+	MOV 32H,#03H
+	MOV 33H,#07H
+	MOV 34H,#09H
+	MOV 35H,#14H
+	MOV 36H,#13H
+	MOV 37H,#08H
+	MOV 38H,#01H
+	MOV 39H,#12H
+SORT:
+	MOV R0,#ARRAY
+	MOV R7,#SIZE-1
+	CLR CHANGE 
+GOON:
+	MOV A,@R0
+	MOV R2,A
+	INC R0
+	MOV B,@R0
+	CJNE A,B,NOTEQUAL
+	SJMP NEXT
+NOTEQUAL:
+	JC NEXT
+	SETB CHANGE
+	XCH A,@R0
+	DEC R0
+	XCH A,@R0
+	INC R0
+NEXT:
+	DJNZ R7,GOON
+	JB CHANGE,SORT
+
+	MOV R0,#31H
+	MOV R2,#0				   ;di wei
+	MOV R3,#0				   ;gao wei
+	MOV B,#8				   ;xun huan 8 ci
+LOOP1:
+	MOV A,@R0					;qu di yi ge shu 
+	ADD A,R2					;xiang jia
+	MOV R2,A					;cun hui
+	MOV A,R3					;gao wei he
+	ADDC A,#0					;
+	MOV R3,A
+	INC R0						;zhi xiang xia yi ge dan yuan 
+	DJNZ B,LOOP1				;jia  wan suo you shu ju
+	MOV B,#3					;zhun bei chu 8
+LOOP2:
+	MOV A,R3					;gao wei he 
+	CLR C						;
+	RRC A
+	MOV R3,A
+	MOV A,R2
+	RRC A
+	MOV R2,A
+	DJNZ B,LOOP2
+	LJMP $
+	END
