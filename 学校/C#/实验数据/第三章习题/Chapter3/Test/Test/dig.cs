@@ -1,0 +1,34 @@
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+
+//namespace Test
+//{
+//    public class Digit
+//    {
+//        byte value;
+//        public Digit(byte value)
+//        {
+//            if (value < 0 || value > 9)
+//                throw new ArgumentException();
+//            this.value = value;
+//        }       
+//        public static implicit operator byte(Digit d)
+//        {
+//            return d.value;
+//        }
+//    }
+
+//    class dig
+//    {
+//        static void Main(string[] args)
+//        {
+//            Digit dig = new Digit(7);
+//            byte num = dig;
+//            Console.WriteLine("num={0}", num);
+//            Console.ReadLine();
+//        }
+//    }
+//}
